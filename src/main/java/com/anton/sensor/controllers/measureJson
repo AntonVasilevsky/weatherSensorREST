@@ -1,0 +1,6 @@
+"id": 1,
+    "value": 25.5,
+    "raining": true,
+    "sensor": {
+        "name": "SensorName"
+    }
