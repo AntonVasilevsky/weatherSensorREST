@@ -16,7 +16,7 @@ public class Sensor {
     @NotEmpty
 
     private String name;
-    @OneToMany(mappedBy = "sensor")
+    @OneToMany(mappedBy = "sensor", fetch = FetchType.LAZY)
     private List<Measurement> measurements;
 
     public Sensor() {

@@ -1,51 +1,26 @@
-package com.anton.sensor.models;
+package com.anton.sensor.dto;
 
-import jakarta.persistence.*;
+import com.anton.sensor.models.Sensor;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "measurement")
-public class Measurement {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "value")
+public class MeasurementDto {
     @DecimalMin(value = "-100.0", message = "value should be between -100 and 100")
     @DecimalMax(value = "100.0", message = "value should be between -100 and 100")
 
     private float value;
-    @Column(name = "raining")
 
     private boolean raining;
-    @ManyToOne()
-    @JoinColumn(name = "sensor_name", referencedColumnName = "name")
+
+
     private Sensor sensor;
-
-    @Column(name = "created_at")
     private LocalDateTime createdAt;
-
-    public Measurement() {
-    }
-    @PrePersist
-    public void prePersist() {
-        if(sensor == null) {
-            throw new IllegalArgumentException("Measurement should have a sensor");
-        }
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public float getValue() {
         return value;
@@ -81,9 +56,8 @@ public class Measurement {
 
     @Override
     public String toString() {
-        return "Measurement{" +
-                "id=" + id +
-                ", value=" + value +
+        return "MeasurementDto{" +
+                "value=" + value +
                 ", raining=" + raining +
                 ", sensorName=" + sensor.getName() +
                 ", createdAt=" + createdAt +
