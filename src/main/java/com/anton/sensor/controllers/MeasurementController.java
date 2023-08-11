@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/measure")
@@ -32,8 +33,11 @@ public class MeasurementController {
         sensorList = sensorService.findAll();
     }
     @GetMapping
-    public List<Measurement> findAll() {
-        return measurementService.findAll();
+    public List<MeasurementDto> findAll() {
+        return measurementService.findAll()
+                .stream()
+                .map(this::convertToMeasurementDto)
+                .collect(Collectors.toList());
     }
     @PostMapping("/add")
 
@@ -53,8 +57,6 @@ public class MeasurementController {
             sensorService.register(sensor);
             sensorList.add(sensor);
         }
-
-        measurementDto.setCreatedAt(LocalDateTime.now());
 
         measurementService.add(convertToMeasurement(measurementDto));
 

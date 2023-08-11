@@ -41,6 +41,7 @@ public class MeasurementService {
     }
     @Transactional
     public void add(Measurement me) {
+        enrichMeasurement(me);
         measurementRepository.save(me);
     }
 
@@ -49,6 +50,9 @@ public class MeasurementService {
     }
     public MeasurementDto convertToMeasurementDto(Measurement measurement) {
         return modelMapper.map(measurement, MeasurementDto.class);
+    }
+    public void enrichMeasurement(Measurement measurement) {
+        measurement.setCreatedAt(LocalDateTime.now());
     }
 
 }

@@ -1,5 +1,6 @@
 package com.anton.sensor.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
@@ -25,6 +26,7 @@ public class Measurement {
     private boolean raining;
     @ManyToOne()
     @JoinColumn(name = "sensor_name", referencedColumnName = "name")
+    @JsonManagedReference
     private Sensor sensor;
 
     @Column(name = "created_at")

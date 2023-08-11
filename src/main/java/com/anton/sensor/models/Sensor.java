@@ -1,5 +1,6 @@
 package com.anton.sensor.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -17,6 +18,7 @@ public class Sensor {
 
     private String name;
     @OneToMany(mappedBy = "sensor", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Measurement> measurements;
 
     public Sensor() {
