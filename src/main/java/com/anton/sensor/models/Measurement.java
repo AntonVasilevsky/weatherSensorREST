@@ -26,7 +26,7 @@ public class Measurement {
     private boolean raining;
     @ManyToOne()
     @JoinColumn(name = "sensor_name", referencedColumnName = "name")
-    @JsonManagedReference
+    //@JsonManagedReference
     private Sensor sensor;
 
     @Column(name = "created_at")

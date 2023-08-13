@@ -40,9 +40,9 @@ public class MeasurementService {
         return measurementRepository.findAll();
     }
     @Transactional
-    public void add(Measurement me) {
-        enrichMeasurement(me);
-        measurementRepository.save(me);
+    public void add(Measurement measurement) {
+        enrichMeasurement(measurement);
+        measurementRepository.save(measurement);
     }
 
     public Measurement convertToMeasurement(MeasurementDto measurementDto) {

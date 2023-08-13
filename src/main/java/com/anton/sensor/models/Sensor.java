@@ -13,12 +13,12 @@ public class Sensor {
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="name", unique = true)
+    @Column(name="name")
     @NotEmpty
 
     private String name;
-    @OneToMany(mappedBy = "sensor", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @OneToMany(mappedBy = "sensor")  // fetch = FetchType.LAZY
+    //@JsonBackReference
     private List<Measurement> measurements;
 
     public Sensor() {

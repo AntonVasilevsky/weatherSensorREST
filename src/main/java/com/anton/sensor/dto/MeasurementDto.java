@@ -1,6 +1,8 @@
 package com.anton.sensor.dto;
 
 import com.anton.sensor.models.Sensor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -15,12 +17,13 @@ public class MeasurementDto {
     @DecimalMax(value = "100.0", message = "value should be between -100 and 100")
 
     private float value;
-
-    private boolean raining;
+    @NotNull(message = "Field raining should be set")
+    private Boolean raining;
 
 
     private Sensor sensor;
     private LocalDateTime createdAt;
+
 
     public float getValue() {
         return value;

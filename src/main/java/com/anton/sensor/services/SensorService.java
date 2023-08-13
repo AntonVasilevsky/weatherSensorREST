@@ -1,7 +1,11 @@
 package com.anton.sensor.services;
 
+import com.anton.sensor.dto.SensorDto;
 import com.anton.sensor.models.Sensor;
 import com.anton.sensor.repositories.SensorRepository;
+import com.anton.sensor.util.DuplicateValueException;
+import org.modelmapper.ModelMapper;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +16,11 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class SensorService {
     private final SensorRepository sensorRepository;
+    private final ModelMapper modelMapper;
 
-    public SensorService(SensorRepository sensorRepository) {
+    public SensorService(SensorRepository sensorRepository, ModelMapper modelMapper) {
         this.sensorRepository = sensorRepository;
+        this.modelMapper = modelMapper;
     }
     public Optional<Sensor> findByName(String name) {
         return sensorRepository.findByName(name);
@@ -27,6 +33,16 @@ public class SensorService {
     }
     @Transactional
     public void register(Sensor sensor) {
-        sensorRepository.save(sensor);
+        try {
+            sensorRepository.save(sensor);
+        }catch (DataIntegrityViolationException e) {
+            throw new DuplicateValueException("Sensor already exists: " + e.getMessage());
+        }
+    }
+    public  SensorDto convertToSensorDto(Sensor sensor) {
+        return modelMapper.map(sensor, SensorDto.class);
+    }
+    public Sensor convertToSensor(SensorDto sensorDto) {
+        return modelMapper.map(sensorDto, Sensor.class);
     }
 }
