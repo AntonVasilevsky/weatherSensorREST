@@ -1,13 +1,19 @@
 package com.anton.sensor.services;
 
 import com.anton.sensor.dto.SensorDto;
+import com.anton.sensor.exceptions.ErrorResponse;
 import com.anton.sensor.models.Sensor;
 import com.anton.sensor.repositories.SensorRepository;
-import com.anton.sensor.util.DuplicateValueException;
+import com.anton.sensor.exceptions.DuplicateValueException;
+import jakarta.validation.ConstraintViolationException;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,4 +51,5 @@ public class SensorService {
     public Sensor convertToSensor(SensorDto sensorDto) {
         return modelMapper.map(sensorDto, Sensor.class);
     }
+
 }

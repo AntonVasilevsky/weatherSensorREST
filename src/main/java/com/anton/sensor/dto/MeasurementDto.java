@@ -1,11 +1,6 @@
 package com.anton.sensor.dto;
 
 import com.anton.sensor.models.Sensor;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
@@ -20,10 +15,18 @@ public class MeasurementDto {
     @NotNull(message = "Field raining should be set")
     private Boolean raining;
 
-
+    @NotNull(message = "Measurement should be assigned to sensor")
     private Sensor sensor;
     private LocalDateTime createdAt;
 
+
+
+    public MeasurementDto(float value,  Boolean raining, Sensor sensor, LocalDateTime createdAt) {
+        this.value = value;
+        this.raining = raining;
+        this.sensor = sensor;
+        this.createdAt = createdAt;
+    }
 
     public float getValue() {
         return value;

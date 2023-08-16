@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 @Component
-public class SensorDtoValidator implements Validator {
+public class SensorValidator implements Validator {
     private final SensorService sensorService;
 
-    public SensorDtoValidator(SensorService sensorService) {
+    public SensorValidator(SensorService sensorService) {
         this.sensorService = sensorService;
     }
 
@@ -21,10 +21,9 @@ public class SensorDtoValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        SensorDto sensorDto = (SensorDto) target;
-        if(sensorService.findByName(sensorDto.getName()).isPresent()) {
-            errors.rejectValue("name", "", "sensor already registered");
-        }
+        Sensor sensor = (Sensor) target;
+
+
 
     }
 }
