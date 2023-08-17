@@ -39,6 +39,10 @@ public class MeasurementService {
     public List<Measurement> findAll() {
         return measurementRepository.findAll();
     }
+    public List<Measurement> findAllByRaining() {
+        return measurementRepository.findAllByRaining(true);
+    }
+
     @Transactional
     public void add(Measurement measurement) {
         enrichMeasurement(measurement);

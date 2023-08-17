@@ -42,6 +42,11 @@ public class MeasurementController {
                 .map(this::convertToMeasurementDto)
                 .collect(Collectors.toList());
     }
+    @GetMapping("/rain")
+    public long findRain() {
+        return measurementService.findAllByRaining()
+                .size();
+    }
 
     @PostMapping("/add")
 
