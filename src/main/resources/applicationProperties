@@ -3,6 +3,5 @@ spring.datasource.url=jdbc:postgresql://localhost:
 spring.datasource.username=
 spring.datasource.password=
 
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-spring.jpa.properties.hibernate.show_sql=true
+
 

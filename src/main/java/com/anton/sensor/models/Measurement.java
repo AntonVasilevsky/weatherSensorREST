@@ -6,9 +6,12 @@ import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import java.time.LocalDateTime;
-
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "measurement")
 public class Measurement {
@@ -24,9 +27,9 @@ public class Measurement {
     @Column(name = "raining")
 
     private boolean raining;
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "sensor_name", referencedColumnName = "name")
-    //@JsonManagedReference
+
     private Sensor sensor;
 
     @Column(name = "created_at")

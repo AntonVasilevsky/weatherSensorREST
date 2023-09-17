@@ -6,9 +6,12 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import java.util.List;
-
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "sensor")
 public class Sensor {
@@ -21,7 +24,7 @@ public class Sensor {
     @Size(min = 2, max = 30)
     private String name;
     @OneToMany(mappedBy = "sensor")  // fetch = FetchType.LAZY
-    //@JsonBackReference
+    @JsonBackReference
     private List<Measurement> measurements;
 
     public Sensor() {

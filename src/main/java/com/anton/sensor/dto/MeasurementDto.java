@@ -19,9 +19,10 @@ public class MeasurementDto {
     private Sensor sensor;
     private LocalDateTime createdAt;
 
+    public MeasurementDto() {
+    }
 
-
-    public MeasurementDto(float value,  Boolean raining, Sensor sensor, LocalDateTime createdAt) {
+    public MeasurementDto(float value, Boolean raining, Sensor sensor, LocalDateTime createdAt) {
         this.value = value;
         this.raining = raining;
         this.sensor = sensor;
